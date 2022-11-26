@@ -9,7 +9,6 @@ env:
   DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
   KUBE_URL: ${{ secrets.KUBE_URL }}
   KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
-  AUTHORITY: ${{ SECRETS.AUTHORITY }}
 
 jobs:
   build:
