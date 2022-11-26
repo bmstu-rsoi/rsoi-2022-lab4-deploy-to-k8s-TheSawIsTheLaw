@@ -5,7 +5,6 @@ on:
       - master
 
 env:
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
   KUBE_URL: ${{ secrets.KUBE_URL }}
   KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
@@ -23,7 +22,7 @@ jobs:
       
       - name: Build images
         run: |
-          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
+          docker login -u thesawisthelaw -p $DOCKERHUB_PASS
           make imgs
 
       - name: Deploy
