@@ -18,11 +18,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: docker/build-push-action@v2
+      - uses: docker/setup-buildx-action@v2
       
       - name: Build images
         run: |
-          docker login -u thesawisthelaw -p $DOCKERHUB_PASS
+          docker login -u thesawisthelaw -p $DOCKERHUB_PASS docker.io
           make imgs
 
       - name: Deploy
