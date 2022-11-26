@@ -22,7 +22,7 @@ jobs:
       
       - name: Build images
         run: |
-          docker logout
+          make makeJars
           docker login -u thesawisthelaw -p $DOCKERHUB_PASS
           make imgs
 
