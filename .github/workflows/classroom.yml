@@ -5,9 +5,10 @@ on:
       - master
 
 env:
-  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-  KUBECTL_URL: ${{ secrets.KUBECTL_URL }}
-  KUBECTL_TOKEN: ${{ secrets.KUBECTL_TOKEN }}
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASS }}
+  KUBECTL_URL: ${{ secrets.KUBE_URL }}
+  KUBECTL_TOKEN: ${{ secrets.KUBE_TOKEN }}
 
 jobs:
   build:
@@ -22,7 +23,7 @@ jobs:
       
       - name: Build images
         run: |
-          docker login -u thesawisthelaw -p $DOCKERHUB_PASS
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
           make imgs
           
       - name: Deploy to k8s 
