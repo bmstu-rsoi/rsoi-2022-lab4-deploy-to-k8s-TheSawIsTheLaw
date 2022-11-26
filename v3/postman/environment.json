@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "baseUrl",
-			"value": "",
+			"value": "http://gateway.thesawisthelaw.ru",
 			"enabled": true
 		}
 	],
