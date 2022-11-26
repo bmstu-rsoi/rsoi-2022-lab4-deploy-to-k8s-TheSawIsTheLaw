@@ -5,7 +5,6 @@ makeJars:
 	cd src/rental && sudo ./gradlew bootJar
 
 imgs:
-	make makeJars
 	cd src/gateway && sudo docker build --no-cache -t thesawisthelaw/gateway . && sudo docker push thesawisthelaw/gateway:latest
 	cd src/cars && sudo docker build --no-cache -t thesawisthelaw/cars . && sudo docker push thesawisthelaw/cars:latest
 	cd src/rental && sudo docker build --no-cache -t thesawisthelaw/rental . && sudo docker push thesawisthelaw/rental:latest 
