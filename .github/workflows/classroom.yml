@@ -30,10 +30,9 @@ jobs:
       - name: Deploy
         run: |
           kubectl config set-cluster yc-managed-k8s-caturihqkb4koc79r3al --server="$KUBE_URL" --insecure-skip-tls-verify=true
-          kubectl config set-credentials thesawisthelaw --token="$KUBE_TOKEN"
-          kubectl config set-context yc-managed-k8s-caturihqkb4koc79r3al --cluster=yc-managed-k8s-caturihqkb4koc79r3al --user=thesawisthelaw
+          kubectl config set-credentials admin --token="$KUBE_TOKEN"
+          kubectl config set-context yc-managed-k8s-caturihqkb4koc79r3al --cluster=yc-managed-k8s-caturihqkb4koc79r3al --user=admin
           kubectl config use-context yc-managed-k8s-caturihqkb4koc79r3al
-          helm delete services
           helm install services k8s/services-chart/
           sleep 60
         
