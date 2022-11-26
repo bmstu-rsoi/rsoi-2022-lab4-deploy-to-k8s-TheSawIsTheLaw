@@ -17,14 +17,47 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - uses: docker/setup-buildx-action@v2
-      
-      - name: Build images
+          
+      - name: Build binaries
         run: |
           make makeJars
-          docker login -u thesawisthelaw -p $DOCKERHUB_PASS
-          make imgs
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: thesawisthelaw
+          password: $DOCKERHUB_PASS
+      
+      - name: Build and push gateway
+        uses: docker/build-push-action@v3
+        with:
+          context: /src/gateway
+          push: true
+          tags: thesawisthelaw/gateway:latest
+          
+      - name: Build and push cars
+        uses: docker/build-push-action@v3
+        with:
+          context: /src/cars
+          push: true
+          tags: thesawisthelaw/cars:latest
+          
+      - name: Build and push rental
+        uses: docker/build-push-action@v3
+        with:
+          context: /src/rental
+          push: true
+          tags: thesawisthelaw/rental:latest
+          
+      - name: Build and push payment
+        uses: docker/build-push-action@v3
+        with:
+          context: /src/payment
+          push: true
+          tags: thesawisthelaw/payment:latest
 
       - name: Deploy
         run: |
