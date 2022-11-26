@@ -22,7 +22,8 @@ jobs:
       
       - name: Build images
         run: |
-          docker login -u thesawisthelaw -p $DOCKERHUB_PASS docker.io
+          docker logout
+          docker login -u thesawisthelaw -p $DOCKERHUB_PASS
           make imgs
 
       - name: Deploy
