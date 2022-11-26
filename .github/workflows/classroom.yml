@@ -6,9 +6,9 @@ on:
 
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASS }}
-  KUBECTL_URL: ${{ secrets.KUBE_URL }}
-  KUBECTL_TOKEN: ${{ secrets.KUBE_TOKEN }}
+  DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
+  KUBE_URL: ${{ secrets.KUBE_URL }}
+  KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
 
 jobs:
   build:
