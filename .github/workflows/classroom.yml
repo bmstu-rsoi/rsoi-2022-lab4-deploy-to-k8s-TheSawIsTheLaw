@@ -19,10 +19,8 @@ jobs:
           fetch-depth: 0
 
       - uses: docker/setup-buildx-action@v2
-      - name: Build images
-        run: docker-compose build
-        
-      - name: Push images
+      
+      - name: Build and push images
         run: |
           docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
           make imgs
