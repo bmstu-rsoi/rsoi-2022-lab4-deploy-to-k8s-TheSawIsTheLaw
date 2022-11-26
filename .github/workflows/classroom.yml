@@ -29,9 +29,9 @@ jobs:
       - name: Deploy
         run: |
           kubectl config set-cluster cars-service-cluster --server="$KUBE_URL" --insecure-skip-tls-verify=true
-          kubectl config set-credentials admin --token="$KUBE_TOKEN"
-          kubectl config set-context default --cluster=cars-service-cluster --user=admin
-          kubectl config use-context default
+          kubectl config set-credentials thesawisthelaw --token="$KUBE_TOKEN"
+          kubectl config set-context yc-cars-service-cluster --cluster=yc-managed-k8s-caturihqkb4koc79r3al --user=yc-managed-k8s-caturihqkb4koc79r3al
+          kubectl config use-context yc-cars-service-cluster
           helm install services k8s/services-chart/
           sleep 60
         
