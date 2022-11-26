@@ -21,10 +21,10 @@ jobs:
 
       - uses: docker/setup-buildx-action@v2
       
-      - name: Build images
-        run: |
-          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
-          make imgs
+#       - name: Build images
+#         run: |
+#           docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
+#           make imgs
           
       - name: Deploy to k8s 
         run: |
