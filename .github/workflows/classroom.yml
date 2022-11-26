@@ -30,8 +30,6 @@ jobs:
         run: |
           kubectl config set-cluster cars-service-cluster --server="$KUBE_URL" --insecure-skip-tls-verify=true
           kubectl config set-credentials $DOCKERHUB_USERNAME --token="$KUBE_TOKEN"
-          kubectl config set-context default --cluster=cars-service-cluster --user=$DOCKERHUB_USERNAME
-          kubectl config use-context default
           helm install services k8s/services-chart/
           sleep 60
         
