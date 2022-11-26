@@ -29,12 +29,12 @@ jobs:
 
       - name: Deploy
         run: |
-          kubectl config set-cluster yc-managed-k8s-caturihqkb4koc79r3al --server="$KUBE_URL" --insecure-skip-tls-verify=true
+          kubectl config set-cluster cars-service-cluster --server="$KUBE_URL" --insecure-skip-tls-verify=true
           kubectl config set-credentials admin --token="$KUBE_TOKEN"
-          kubectl config set-context yc-managed-k8s-caturihqkb4koc79r3al --cluster=yc-managed-k8s-caturihqkb4koc79r3al --user=admin
-          kubectl config use-context yc-managed-k8s-caturihqkb4koc79r3al
-          helm install services k8s/services-chart/
-          sleep 60
+          kubectl config set-context default --cluster=cars-service-cluster --user=admin
+          kubectl config use-context default
+          cd k8s && helm install services services-chart/
+          sleep 45
         
       - name: Run API Tests
         uses: matt-ball/newman-action@master
