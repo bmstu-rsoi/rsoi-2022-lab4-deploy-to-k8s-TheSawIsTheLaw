@@ -1,7 +1,14 @@
 name: GitHub Classroom Workflow
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+
+env:
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+  KUBECTL_URL: ${{ secrets.KUBECTL_URL }}
+  KUBECTL_TOKEN: ${{ secrets.KUBECTL_TOKEN }}
+
 jobs:
   build:
     name: Autograding
@@ -12,14 +19,28 @@ jobs:
           fetch-depth: 0
 
       - uses: docker/setup-buildx-action@v2
-
-      # TODO build, publish to docker hub, deploy to k8s
-
+      - name: Build images
+        run: docker-compose build
+        
+      - name: Push images
+        run: |
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
+          make imgs
+          
+      - name: Deploy to k8s 
+        run: |
+          kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
+          kubectl config set-credentials admin --token="$KUBE_TOKEN"
+          kubectl config set-context default --cluster=$CLUSTER_NAME --user=admin
+          kubectl config use-context default
+          helm install services k8s/services-chart/
+          sleep 60
+        
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
-          collection: <variant>/postman/collection.json
-          environment: <variant>/postman/environment.json
+          collection: v3/postman/collection.json
+          environment: v3/postman/environment.json
           delayRequest: 100
           reporters: '[ "cli" ]'
 
